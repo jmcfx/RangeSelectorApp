@@ -34,5 +34,4 @@ class RandomizerPage extends HookWidget {
   }
 }
 
-int? _generateNumber;
-final randomGenerator = Random();
+
