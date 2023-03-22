@@ -1,7 +1,6 @@
 //import The material dart Package so we can Use The Dart Functionalities
 import 'dart:ffi';
 import 'package:designp/newscreens/RangeSelectorPage.dart';
-import 'package:designp/newscreens/SubmitPage.dart';
 import 'package:flutter/material.dart';
 
 //Entry Point in Our App
