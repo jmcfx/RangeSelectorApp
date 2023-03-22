@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class RandomizerPage extends HookWidget {
-  const RandomizerPage({required this.min, required this.max, super.key});
+  RandomizerPage({required this.min, required this.max, super.key});
   final int min, max;
+  final randomGenerator = Random();
   @override
   Widget build(BuildContext context) {
+    final generatedNumber = useState<int?>(null);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -14,7 +16,7 @@ class RandomizerPage extends HookWidget {
       ),
       body: Center(
         child: Text(
-          _generateNumber?.toString() ?? "Generate Number",
+          generatedNumber.value?.toString() ?? "Generate Number",
           style: const TextStyle(
             fontSize: 42,
           ),
@@ -22,13 +24,7 @@ class RandomizerPage extends HookWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          setState(
-            () {
-              //if min = 10 && max = 20
-              _generateNumber = widget.min +
-                  randomGenerator.nextInt(widget.max + 1 - widget.min);
-            },
-          );
+          generatedNumber.value = min + randomGenerator.nextInt(max + 1 - min);
         },
         backgroundColor: Colors.black,
         label: const Text("Generate"),
@@ -36,9 +32,7 @@ class RandomizerPage extends HookWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
-
 }
 
-  int? _generateNumber;
-  final randomGenerator = Random();
-  
+int? _generateNumber;
+final randomGenerator = Random();
