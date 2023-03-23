@@ -1,7 +1,9 @@
 //import The material dart Package so we can Use The Dart Functionalities
 import 'dart:ffi';
-import 'package:designp/newscreens/RangeSelectorPage.dart';
+import 'package:designp/RandomizerChangeNotifier.dart';
+import 'package:designp/RangeSelectorPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Entry Point in Our App
 void main() => runApp(const MyApp());
@@ -12,10 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      title: 'My Flutter App',
-      themeMode: ThemeMode.system,
-      home: RangeSelectorPage(),
+    return ChangeNotifierProvider(
+      create:(context)=> RandomizerChangeNotifier() ,
+      child: MaterialApp(
+        title: "Randomizer",
+        home: RangeSelectorPage(),
+      ),
     );
   }
 }

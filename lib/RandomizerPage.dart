@@ -1,30 +1,28 @@
 import 'dart:math';
+import 'package:designp/RandomizerChangeNotifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:provider/provider.dart';
 
-class RandomizerPage extends HookWidget {
-  RandomizerPage({required this.min, required this.max, super.key});
-  final int min, max;
-  final randomGenerator = Random();
+class RandomizerPage extends StatelessWidget {
+  RandomizerPage({super.key});
   @override
   Widget build(BuildContext context) {
-    final generatedNumber = useState<int?>(null);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text("Random Numbers"),
       ),
       body: Center(
-        child: Text(
-          generatedNumber.value?.toString() ?? "Generate Number",
-          style: const TextStyle(
-            fontSize: 42,
+        child: Consumer<RandomizerChangeNotifier>(
+          builder: (context, value, child) => Text(
+            value.getGeneratedNumber?.toString() ?? "Generate a Number",
+            style: const TextStyle(fontSize: 42),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          generatedNumber.value = min + randomGenerator.nextInt(max + 1 - min);
+          context.read<RandomizerChangeNotifier>().generateRandomNumber();
         },
         backgroundColor: Colors.black,
         label: const Text("Generate"),
@@ -33,5 +31,3 @@ class RandomizerPage extends HookWidget {
     );
   }
 }
-
-
